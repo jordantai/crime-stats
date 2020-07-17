@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
+import CrimeCard from './CrimeCard';
 
 class CrimeList extends Component {
-  state = {
+  state: CrimeListState = {
     crime: [],
     isLoading: true,
   };
 
   componentDidMount() {
+    console.log('mounted');
     this.getCrimes();
   }
 
@@ -19,14 +21,16 @@ class CrimeList extends Component {
 
   render() {
     const { crime, isLoading } = this.state;
-    console.log(crime);
-
     if (isLoading) return <h3>Loading...</h3>;
     return (
       <main>
-        {crime.map((incident) => {
-          return <p>{incident}</p>;
-        })}
+        <section>
+          <ul>
+            {crime.map((incident) => {
+              return <CrimeCard key={incident.id} incident={incident} />;
+            })}
+          </ul>
+        </section>
       </main>
     );
   }
