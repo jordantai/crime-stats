@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatMonth } from '../utils/formatMonth';
 
 type CrimeCardProps = {
   incident: Incident;
@@ -22,7 +23,7 @@ const CrimeCard = ({ incident }: CrimeCardProps) => {
     if (outcome_status !== null) {
       const outcomeStatus = outcome_status.category;
       const outcomeStatusDate = outcome_status.date;
-      return outcomeStatus + ' ' + outcomeStatusDate;
+      return outcomeStatus + ' ' + formatMonth(outcomeStatusDate);
     } else {
       return 'Unknown';
     }
@@ -33,7 +34,7 @@ const CrimeCard = ({ incident }: CrimeCardProps) => {
     <li className="incident">
       <p>category: {category}</p>
       <p>location type: {location_type}</p>
-      <p>month: {month}</p>
+      <p>month: {formatMonth(month)}</p>
       <p>outcome: {crimeOutcome(outcome_status)}</p>
     </li>
   );
