@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
 import CrimeCard from './CrimeCard';
+import CrimeChart from './CrimeChart';
 
 class CrimeList extends Component {
   state: CrimeListState = {
@@ -30,6 +31,9 @@ class CrimeList extends Component {
               return <CrimeCard key={incident.id} incident={incident} />;
             })}
           </ul>
+        </section>
+        <section>
+          <CrimeChart crime={crime} />
         </section>
       </main>
     );

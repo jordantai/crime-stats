@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatMonth } from '../utils/formatMonth';
+import { formatMonth } from '../utils/functions';
 
 type CrimeCardProps = {
   incident: Incident;
@@ -29,7 +29,6 @@ const CrimeCard = ({ incident }: CrimeCardProps) => {
     }
   };
 
-  console.log(incident);
   return (
     <li className="incident">
       <p>category: {category}</p>

@@ -19,7 +19,7 @@ type Incident = {
   location_type: string;
   location: IncidentLocation;
   context: string;
-  outcome_status: IncidentOutcomeStatus;
+  outcome_status: IncidentOutcomeStatus | null;
   persistent_id: string;
   id: number;
   location_subtype: string;
@@ -29,4 +29,8 @@ type Incident = {
 type CrimeListState = {
   crime: Incident[];
   isLoading: boolean;
+};
+
+type CrimeCategoryLookup = {
+  category: number;
 };
