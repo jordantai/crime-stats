@@ -34,3 +34,11 @@ type CrimeListState = {
 type CrimeCategoryLookupObject = {
   [key: string]: number;
 };
+
+type CrimeCardProps = {
+  incident: Incident;
+};
+
+type CrimeChartProps = {
+  crime: Incident[];
+};

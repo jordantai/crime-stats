@@ -1,10 +1,6 @@
 import React from 'react';
 import { formatMonth } from '../utils/functions';
 
-type CrimeCardProps = {
-  incident: Incident;
-};
-
 const CrimeCard = ({ incident }: CrimeCardProps) => {
   const {
     category,
