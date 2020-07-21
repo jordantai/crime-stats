@@ -18,7 +18,7 @@ const CrimeCard = ({ incident }: CrimeCardProps) => {
   } = incident;
 
   const crimeOutcome = (
-    outcome_status: IncidentOutcomeStatus
+    outcome_status: IncidentOutcomeStatus | null
   ): string | null => {
     if (outcome_status !== null) {
       const outcomeStatus = outcome_status.category;

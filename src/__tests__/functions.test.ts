@@ -58,7 +58,92 @@ describe('crimeCategoryLookup()', () => {
     ];
     expect(crimeCategoryLookup(input)).toEqual({ 'anti-social-behaviour': 1 });
   });
-  // test('original array is not mutated', () => {
-  //   expect(crimeCategoryLookup([])).not.toBe([]);
-  // });
+  test('works for mulitple objects in the array', () => {
+    const input: Incident[] = [
+      {
+        category: 'anti-social-behaviour',
+        context: '',
+        id: 78315854,
+        location: {
+          latitude: '53.341709',
+          street: { id: 582821, name: 'On or near Lawrence Place' },
+          longitude: '-2.125837',
+        },
+        location_subtype: '',
+        location_type: 'Force',
+        month: '2019-10',
+        outcome_status: null,
+        persistent_id: '',
+      },
+      {
+        category: 'anti-social-behaviour',
+        context: '',
+        id: 78315854,
+        location: {
+          latitude: '53.341709',
+          street: { id: 582821, name: 'On or near Lawrence Place' },
+          longitude: '-2.125837',
+        },
+        location_subtype: '',
+        location_type: 'Force',
+        month: '2019-10',
+        outcome_status: null,
+        persistent_id: '',
+      },
+      {
+        category: 'burglary',
+        context: '',
+        id: 78315854,
+        location: {
+          latitude: '53.341709',
+          street: { id: 582821, name: 'On or near Lawrence Place' },
+          longitude: '-2.125837',
+        },
+        location_subtype: '',
+        location_type: 'Force',
+        month: '2019-10',
+        outcome_status: null,
+        persistent_id: '',
+      },
+    ];
+    expect(crimeCategoryLookup(input)).toEqual({
+      'anti-social-behaviour': 2,
+      burglary: 1,
+    });
+  });
+  test('does not mutate original array', () => {
+    const input: Incident[] = [
+      {
+        category: 'anti-social-behaviour',
+        context: '',
+        id: 78315854,
+        location: {
+          latitude: '53.341709',
+          street: { id: 582821, name: 'On or near Lawrence Place' },
+          longitude: '-2.125837',
+        },
+        location_subtype: '',
+        location_type: 'Force',
+        month: '2019-10',
+        outcome_status: null,
+        persistent_id: '',
+      },
+    ];
+    crimeCategoryLookup(input);
+    expect(input[0]).toEqual({
+      category: 'anti-social-behaviour',
+      context: '',
+      id: 78315854,
+      location: {
+        latitude: '53.341709',
+        street: { id: 582821, name: 'On or near Lawrence Place' },
+        longitude: '-2.125837',
+      },
+      location_subtype: '',
+      location_type: 'Force',
+      month: '2019-10',
+      outcome_status: null,
+      persistent_id: '',
+    });
+  });
 });

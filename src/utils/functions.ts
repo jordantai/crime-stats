@@ -16,9 +16,8 @@ export const formatMonth = (dateString: string): string => {
 };
 
 // takes crime props data array and makes into a look up obj so the crime category (i.e. burglary) can be counted and then displayed in a chart.
-
 export const crimeCategoryLookup = (crimeArray: Incident[]) => {
-  let lookupObj = {};
+  let lookupObj: CrimeCategoryLookupObject = {};
   crimeArray.forEach((incident) => {
     if (lookupObj.hasOwnProperty(incident.category)) {
       lookupObj[incident.category]++;
