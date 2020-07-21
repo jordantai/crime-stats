@@ -31,6 +31,4 @@ type CrimeListState = {
   isLoading: boolean;
 };
 
-type CrimeCategoryLookup = {
-  category: number;
-};
+type IncidentKeys = keyof Incident;

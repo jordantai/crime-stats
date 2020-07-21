@@ -21,8 +21,11 @@ export const crimeCategoryLookup = (crimeArray: Incident[]) => {
   let lookupObj = {};
   crimeArray.forEach((incident) => {
     if (lookupObj.hasOwnProperty(incident.category)) {
-      console.log(incident.category);
+      lookupObj[incident.category]++;
+    } else {
+      lookupObj[incident.category] = 1;
     }
   });
+  console.log(lookupObj);
   return lookupObj;
 };

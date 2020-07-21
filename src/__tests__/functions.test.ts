@@ -36,7 +36,7 @@ describe('crimeCategoryLookup()', () => {
       },
     ];
     expect(crimeCategoryLookup(input)).not.toBe(input);
-    expect(crimeCategoryLookup(input)).toEqual({});
+    expect(crimeCategoryLookup(input)).toEqual({ 'anti-social-behaviour': 1 });
   });
   test('takes an array of crime objects and returns a reference object with the key as the category name and the value as the number objects with that category name', () => {
     const input: Incident[] = [
