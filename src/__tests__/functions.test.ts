@@ -1,4 +1,3 @@
-// import { expect, test, describe } from '@jest/globals';
 import { formatMonth } from '../utils/formatMonth';
 
 describe('formatMonth()', () => {
