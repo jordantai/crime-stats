@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
 import CrimeCard from './CrimeCard';
-import CrimeChart from './CrimeChart';
+import CrimeCategoryChart from './CrimeCategoryChart';
+import CrimeOutcomeChart from './CrimeOutcomeChart';
 
 class CrimeList extends Component {
   state: CrimeListState = {
@@ -33,7 +34,8 @@ class CrimeList extends Component {
           </ul>
         </section>
         <section>
-          <CrimeChart crime={crime} />
+          <CrimeCategoryChart crime={crime} />
+          <CrimeOutcomeChart crime={crime} />
         </section>
       </main>
     );

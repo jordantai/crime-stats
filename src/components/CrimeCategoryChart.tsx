@@ -2,7 +2,7 @@ import React from 'react';
 import { crimeCategoryLookup } from '../utils/functions';
 import { Doughnut } from 'react-chartjs-2';
 
-const CrimeChart = ({ crime }: CrimeChartProps) => {
+const CrimeCategoryChart = ({ crime }: CrimeChartProps) => {
   const chartObj = crimeCategoryLookup(crime);
 
   //Chart data object
@@ -69,4 +69,4 @@ const CrimeChart = ({ crime }: CrimeChartProps) => {
   );
 };
 
-export default CrimeChart;
+export default CrimeCategoryChart;

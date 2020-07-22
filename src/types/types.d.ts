@@ -35,6 +35,10 @@ type CrimeCategoryLookupObject = {
   [key: string]: number;
 };
 
+type CrimeOutcomeLookupObject = {
+  [key: string]: number;
+};
+
 type CrimeCardProps = {
   incident: Incident;
 };

@@ -25,6 +25,25 @@ export const crimeCategoryLookup = (crimeArray: Incident[]) => {
       lookupObj[incident.category] = 1;
     }
   });
-  console.log(lookupObj);
+  return lookupObj;
+};
+
+export const crimeOutcomeLookup = (crimeArray: Incident[]) => {
+  let lookupObj: CrimeOutcomeLookupObject = {};
+  crimeArray.forEach((incident) => {
+    if (incident.outcome_status === null) {
+      if (lookupObj.hasOwnProperty(String(incident.outcome_status))) {
+        lookupObj[String(incident.outcome_status)]++;
+      } else {
+        lookupObj[String(incident.outcome_status)] = 1;
+      }
+    } else {
+      if (lookupObj.hasOwnProperty(incident.outcome_status.category)) {
+        lookupObj[incident.outcome_status.category]++;
+      } else {
+        lookupObj[incident.outcome_status.category] = 1;
+      }
+    }
+  });
   return lookupObj;
 };
