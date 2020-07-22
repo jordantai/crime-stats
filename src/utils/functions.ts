@@ -32,10 +32,10 @@ export const crimeOutcomeLookup = (crimeArray: Incident[]) => {
   let lookupObj: CrimeOutcomeLookupObject = {};
   crimeArray.forEach((incident) => {
     if (incident.outcome_status === null) {
-      if (lookupObj.hasOwnProperty(String(incident.outcome_status))) {
-        lookupObj[String(incident.outcome_status)]++;
+      if (lookupObj['Unknown']) {
+        lookupObj['Unknown']++;
       } else {
-        lookupObj[String(incident.outcome_status)] = 1;
+        lookupObj['Unknown'] = 1;
       }
     } else {
       if (lookupObj.hasOwnProperty(incident.outcome_status.category)) {

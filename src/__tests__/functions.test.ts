@@ -179,7 +179,7 @@ describe('crimeOutcomeLookup()', () => {
     ];
     expect(crimeOutcomeLookup(input)).not.toBe(input);
   });
-  test('takes an array of crime objects and returns a reference object with the outcome_status values as the keys in the new object. The values in the new object is a count of the keys', () => {
+  test('takes an array of crime objects and returns a reference object with the outcome_status values as the keys in the new object. The values in the new object is a count of the keys. If the value is null this is replaced with "Unknown', () => {
     const input: Incident[] = [
       {
         category: 'anti-social-behaviour',
@@ -197,7 +197,7 @@ describe('crimeOutcomeLookup()', () => {
         persistent_id: '',
       },
     ];
-    expect(crimeOutcomeLookup(input)).toEqual({ null: 1 });
+    expect(crimeOutcomeLookup(input)).toEqual({ Unknown: 1 });
   });
   test('works for non null values when outcome_status is an object', () => {
     const input: Incident[] = [
@@ -262,7 +262,7 @@ describe('crimeOutcomeLookup()', () => {
     ];
     expect(crimeOutcomeLookup(input)).toEqual({
       'Investigation complete; no suspect identified': 1,
-      null: 1,
+      Unknown: 1,
     });
   });
   test('does not mutate original array', () => {

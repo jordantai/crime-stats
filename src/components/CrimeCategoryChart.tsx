@@ -4,35 +4,15 @@ import { Doughnut } from 'react-chartjs-2';
 
 const CrimeCategoryChart = ({ crime }: CrimeChartProps) => {
   const chartObj = crimeCategoryLookup(crime);
+  const keysArray = Object.keys(chartObj);
+  const valuesArray = Object.values(chartObj);
 
   //Chart data object
   const data = {
-    labels: [
-      'Anti-Social Behaviour',
-      'Bicycle Theft',
-      'Burglary',
-      'Criminal Damage/Arson',
-      'Other Crime',
-      'Other Theft',
-      'Public Order',
-      'Shoplifting',
-      'Vehicle Crime',
-      'Violent Crime',
-    ],
+    labels: [...keysArray],
     datasets: [
       {
-        data: [
-          chartObj['anti-social-behaviour'],
-          chartObj['bicycle-theft'],
-          chartObj['burglary'],
-          chartObj['criminal-damage-arson'],
-          chartObj['other-crime'],
-          chartObj['other-theft'],
-          chartObj['public-order'],
-          chartObj['shoplifting'],
-          chartObj['vehicle-crime'],
-          chartObj['violent-crime'],
-        ],
+        data: [...valuesArray],
         backgroundColor: [
           '#FF6384',
           '#36A2EB',
