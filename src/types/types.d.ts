@@ -29,6 +29,7 @@ type Incident = {
 type CrimeListState = {
   crime: Incident[];
   isLoading: boolean;
+  monthAndYear: string;
 };
 
 type CrimeCategoryLookupObject = {

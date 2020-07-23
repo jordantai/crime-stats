@@ -27,6 +27,7 @@ const CrimeCard = ({ incident }: CrimeCardProps) => {
 
   return (
     <li className="incident">
+      <p>ID: {id}</p>
       <p>category: {category}</p>
       <p>location type: {location_type}</p>
       <p>month: {formatMonth(month)}</p>

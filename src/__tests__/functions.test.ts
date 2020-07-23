@@ -2,6 +2,7 @@ import {
   formatMonth,
   crimeCategoryLookup,
   crimeOutcomeLookup,
+  formatPolyData,
 } from '../utils/functions';
 
 describe('formatMonth()', () => {
@@ -299,5 +300,29 @@ describe('crimeOutcomeLookup()', () => {
       outcome_status: null,
       persistent_id: '',
     });
+  });
+});
+
+describe('formatPolyData()', () => {
+  test('when passed an empty array, returns an empty string', () => {
+    const input: [] = [];
+    expect(formatPolyData(input)).toBe('');
+  });
+  test('takes a single array with 1 number and returns a string of that value', () => {
+    const input: number[][] = [[53.6255779]];
+    expect(formatPolyData(input)).toBe('53.6255779');
+  });
+  test('reverses the values in the array so the larger (lat) number is first in the string', () => {
+    const input: number[][] = [[-2.379134, 53.6255779]];
+    expect(formatPolyData(input)).toBe('53.6255779,-2.379134');
+  });
+  test('joins mulitple arrays together in one string, with each array"s values separated by a colon', () => {
+    const input: number[][] = [
+      [-2.379134, 53.6255779],
+      [-2.3794096, 53.6287564],
+    ];
+    expect(formatPolyData(input)).toBe(
+      '53.6287564,-2.3794096:53.6255779,-2.379134'
+    );
   });
 });

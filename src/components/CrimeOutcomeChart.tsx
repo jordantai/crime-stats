@@ -5,10 +5,6 @@ import { Doughnut } from 'react-chartjs-2';
 const CrimeOutcomeChart = ({ crime }: CrimeChartProps) => {
   const chartObj = crimeOutcomeLookup(crime);
   const keysArray = Object.keys(chartObj);
-  // const upperCase = keysArray.map((key) => {
-  //   let upperCaseKey = key[0].toUpperCase();
-  //   return upperCaseKey;
-  // });
   const valuesArray = Object.values(chartObj);
 
   // chart data object

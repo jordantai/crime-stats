@@ -28,6 +28,8 @@ export const crimeCategoryLookup = (crimeArray: Incident[]) => {
   return lookupObj;
 };
 
+// crimeOutcomeLookup()
+// takes props data array and makes a lookup object with the outcome data
 export const crimeOutcomeLookup = (crimeArray: Incident[]) => {
   let lookupObj: CrimeOutcomeLookupObject = {};
   crimeArray.forEach((incident) => {
@@ -46,4 +48,14 @@ export const crimeOutcomeLookup = (crimeArray: Incident[]) => {
     }
   });
   return lookupObj;
+};
+
+// formatPolyData()
+// takes array of polygon lat lng data and makes it a string so can be passed as a param in api query
+export const formatPolyData = (arrays: number[][]): string => {
+  let reverseArr: number[][] = [];
+  for (let i = arrays.length - 1; i >= 0; i--) {
+    reverseArr.push(arrays[i].reverse());
+  }
+  return reverseArr.join(':');
 };
