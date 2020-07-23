@@ -325,4 +325,29 @@ describe('formatPolyData()', () => {
       '53.6287564,-2.3794096:53.6255779,-2.379134'
     );
   });
+  test('works for multiple nested arrays', () => {
+    const input: number[][] = [
+      [-2.379134, 53.6255779],
+      [-2.3794096, 53.6287564],
+      [-2.3790976, 53.6270199],
+    ];
+    const expected: string =
+      '53.6270199,-2.3790976:53.6287564,-2.3794096:53.6255779,-2.379134';
+    const input2: number[][] = [
+      [-2.379134, 53.6255779],
+      [-2.3794096, 53.6287564],
+      [-2.3790976, 53.6270199],
+      [-2.3794822, 53.6270807],
+      [-2.3796207, 53.6270093],
+    ];
+    const expected2: string =
+      '53.6270093,-2.3796207:53.6270807,-2.3794822:53.6270199,-2.3790976:53.6287564,-2.3794096:53.6255779,-2.379134';
+    expect(formatPolyData(input)).toBe(expected);
+    expect(formatPolyData(input2)).toBe(expected2);
+  });
+  test('does not mutate original array', () => {
+    const input: number[][] = [[-2.379134, 53.6255779]];
+    formatPolyData(input);
+    expect(input[0]).toEqual([-2.379134, 53.6255779]);
+  });
 });

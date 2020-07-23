@@ -52,10 +52,14 @@ export const crimeOutcomeLookup = (crimeArray: Incident[]) => {
 
 // formatPolyData()
 // takes array of polygon lat lng data and makes it a string so can be passed as a param in api query
-export const formatPolyData = (arrays: number[][]): string => {
+export const formatPolyData = (array: number[][]): string => {
+  const arrCopy: number[][] = array.map((arrItem) => {
+    return arrItem;
+  });
   let reverseArr: number[][] = [];
-  for (let i = arrays.length - 1; i >= 0; i--) {
-    reverseArr.push(arrays[i].reverse());
+  for (let i = arrCopy.length - 1; i >= 0; i--) {
+    reverseArr.push(arrCopy[i].reverse());
   }
+  console.log(arrCopy);
   return reverseArr.join(':');
 };
