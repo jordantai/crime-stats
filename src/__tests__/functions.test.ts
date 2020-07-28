@@ -4,6 +4,7 @@ import {
   crimeOutcomeLookup,
   formatPolyData,
   formatAreaCoords,
+  randomColorGenerator,
 } from '../utils/functions';
 
 describe('formatMonth()', () => {
@@ -378,5 +379,30 @@ describe('formatAreaCoords()', () => {
     ];
     formatAreaCoords(input);
     expect(input[0]).toEqual([53.454705, -2.15902]);
+  });
+});
+
+describe('randomColorGenerator()', () => {
+  test('when passed an empty array, returns and empty array', () => {
+    const input: [] = [];
+    expect(randomColorGenerator(input)).toEqual([]);
+  });
+  test('returns one random hex color string in an array when passed a single item array', () => {
+    const input: number[] = [1];
+    const expected = [expect.stringMatching(/^\#[A-Za-z0-9]/)];
+    expect(randomColorGenerator(input)).toHaveLength(1);
+    const colorArr = randomColorGenerator(input);
+    expect(colorArr[0]).toHaveLength(7);
+    expect(colorArr).toEqual(expect.arrayContaining(expected));
+  });
+  test('returns mulitple hex colour strings in a single array when passed an array with multiple values', () => {
+    const input: number[] = [1, 2, 3];
+    const colorArr = randomColorGenerator(input);
+    expect(colorArr).toHaveLength(3);
+  });
+  test('does not mutate original array', () => {
+    const input: number[] = [1];
+    randomColorGenerator(input);
+    expect(input[0]).toEqual(1);
   });
 });

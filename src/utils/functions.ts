@@ -71,3 +71,20 @@ export const formatAreaCoords = (array: number[][]): string => {
   const arrCopy = JSON.parse(JSON.stringify(array));
   return arrCopy.join(':');
 };
+
+// randomColorGenerator
+// creates a random hex color string for each item in an array. If an array has 2 items it creates 2 random hex strings in an array
+export const randomColorGenerator = (array: number[]) => {
+  const randomColor = () => {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16);
+  };
+  let colorArr: string[] = [];
+  if (array.length > 0) {
+    array.forEach(() => {
+      colorArr.push(randomColor());
+    });
+    return colorArr;
+  } else {
+    return [];
+  }
+};
