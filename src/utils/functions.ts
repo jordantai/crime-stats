@@ -53,13 +53,21 @@ export const crimeOutcomeLookup = (crimeArray: Incident[]) => {
 // formatPolyData()
 // takes array of polygon lat lng data and makes it a string so can be passed as a param in api query
 export const formatPolyData = (array: number[][]): string => {
-  const arrCopy: number[][] = array.map((arrItem) => {
-    return arrItem;
-  });
+  // deep copy array and nested arrays.
+  const arrCopy = JSON.parse(JSON.stringify(array));
+  // reverse the values in the copied array
   let reverseArr: number[][] = [];
   for (let i = arrCopy.length - 1; i >= 0; i--) {
     reverseArr.push(arrCopy[i].reverse());
   }
-  console.log(arrCopy);
+  // join the arrays with a colon and make into a string
   return reverseArr.join(':');
+};
+
+// formatAreaCoords()
+// takes an array with nested co-ordinates of an area boundary in numbers and converts them to a string with a colon between each set of values
+export const formatAreaCoords = (array: number[][]): string => {
+  // deep copy array first
+  const arrCopy = JSON.parse(JSON.stringify(array));
+  return arrCopy.join(':');
 };

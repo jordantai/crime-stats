@@ -24,6 +24,10 @@ const CrimeOutcomeChart = ({ crime }: CrimeChartProps) => {
           '#63D4FF',
           '#CC3151',
           '#718E99',
+          '#cccccc',
+          '#ff0000',
+          '#dddddd',
+          '#333333',
         ],
         hoverBackgroundColor: [
           '#FF6384',
@@ -36,10 +40,15 @@ const CrimeOutcomeChart = ({ crime }: CrimeChartProps) => {
           '#63D4FF',
           '#CC3151',
           '#718E99',
+          '#cccccc',
+          '#ff0000',
+          '#dddddd',
+          '#333333',
         ],
       },
     ],
   };
+  console.log(data);
 
   return (
     <div>

@@ -3,6 +3,7 @@ import {
   crimeCategoryLookup,
   crimeOutcomeLookup,
   formatPolyData,
+  formatAreaCoords,
 } from '../utils/functions';
 
 describe('formatMonth()', () => {
@@ -349,5 +350,33 @@ describe('formatPolyData()', () => {
     const input: number[][] = [[-2.379134, 53.6255779]];
     formatPolyData(input);
     expect(input[0]).toEqual([-2.379134, 53.6255779]);
+  });
+});
+
+describe('formatAreaCoords()', () => {
+  test('when passed an empty array returns an empty string', () => {
+    const input: [] = [];
+    expect(formatAreaCoords(input)).toBe('');
+  });
+  test('takes a single array with one nested array and returns a string of the values', () => {
+    const input: number[][] = [[53.454705, -2.15902]];
+    expect(formatAreaCoords(input)).toEqual('53.454705,-2.15902');
+  });
+  test('joins mulitple arrays together in one string, with each array"s values separated by a colon', () => {
+    const input: number[][] = [
+      [53.454705, -2.15902],
+      [53.407282, -2.213392],
+    ];
+    expect(formatAreaCoords(input)).toBe(
+      '53.454705,-2.15902:53.407282,-2.213392'
+    );
+  });
+  test('does not mutate original array', () => {
+    const input: number[][] = [
+      [53.454705, -2.15902],
+      [53.407282, -2.213392],
+    ];
+    formatAreaCoords(input);
+    expect(input[0]).toEqual([53.454705, -2.15902]);
   });
 });

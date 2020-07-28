@@ -1,38 +1,36 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
-import { formatMonth } from '../utils/functions';
+import { formatMonth, crimeCategoryLookup } from '../utils/functions';
 import CrimeCard from './CrimeCard';
 import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
+import { formatAreaCoords } from '../utils/functions';
+import { stockportAreaCoords } from '../utils/stockportAreaCoords';
 
 class CrimeList extends Component {
   state: CrimeListState = {
     crime: [],
     isLoading: true,
-    monthAndYear: '2019-12',
+    monthAndYear: '2019-02',
+    mapCoords: '',
   };
 
   componentDidMount() {
     console.log('mounted');
     this.getCrimes();
-    this.getMapData();
   }
 
   getCrimes = () => {
-    api.fetchCrimes(this.state.monthAndYear).then((data) => {
-      console.log(data);
-      this.setState({ crime: data, isLoading: false });
-    });
-  };
-
-  getMapData = () => {
-    api.fetchMapAreaData().then((data) => {
-      console.log(data[0].geojson.coordinates);
+    const { monthAndYear } = this.state;
+    const newMapCoords = formatAreaCoords(stockportAreaCoords);
+    api.fetchCrimes(monthAndYear, newMapCoords).then((data) => {
+      this.setState({ crime: data, isLoading: false, mapCoords: newMapCoords });
     });
   };
 
   render() {
     const { crime, isLoading } = this.state;
+    console.log(this.state);
     if (isLoading) return <h3>Loading...</h3>;
     return (
       <main>
