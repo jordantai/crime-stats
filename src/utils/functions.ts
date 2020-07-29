@@ -97,7 +97,7 @@ export const formatNeighourhoodCoords = (
 ): string => {
   let coordString: string = '';
   if (array.length > 0) {
-    const coords = array.forEach((coord) => {
+    array.forEach((coord) => {
       coordString += coord.latitude + ',' + coord.longitude + ':';
     });
   } else {

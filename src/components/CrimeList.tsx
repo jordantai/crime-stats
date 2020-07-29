@@ -4,7 +4,7 @@ import { formatMonth, crimeCategoryLookup } from '../utils/functions';
 import CrimeCard from './CrimeCard';
 import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
-import { formatAreaCoords } from '../utils/functions';
+import { formatAreaCoords, formatNeighourhoodCoords } from '../utils/functions';
 import { stockportAreaCoords } from '../utils/stockportAreaCoords';
 
 class CrimeList extends Component {
