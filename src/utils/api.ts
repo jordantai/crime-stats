@@ -17,9 +17,20 @@ export const fetchCrimes = async (monthAndYear: string, mapCoords: string) => {
   }
 };
 
-const openmapsApiRequest = axios.create({
-  baseURL: 'https://nominatim.openstreetmap.org/search.php',
-});
+export const fetchNeighbourhoodCoords = async () => {
+  try {
+    const { data } = await policeApiRequest.get(
+      `/greater-manchester/JC27/boundary`
+    );
+    return data;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+// const openmapsApiRequest = axios.create({
+//   baseURL: 'https://nominatim.openstreetmap.org/search.php',
+// });
 
 // export const fetchMapAreaData = async () => {
 //   try {

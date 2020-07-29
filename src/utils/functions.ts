@@ -73,18 +73,35 @@ export const formatAreaCoords = (array: number[][]): string => {
 };
 
 // randomColorGenerator
-// creates a random hex color string for each item in an array. If an array has 2 items it creates 2 random hex strings in an array
-export const randomColorGenerator = (array: number[]) => {
+// creates a random hex color string array when given a number. If the given number is 2 it creates 2 random hex strings in an array
+export const randomColorGenerator = (num: number) => {
   const randomColor = () => {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
   };
   let colorArr: string[] = [];
-  if (array.length > 0) {
-    array.forEach(() => {
+  if (num > 0) {
+    for (let i = 0; i < num; i++) {
       colorArr.push(randomColor());
-    });
+    }
     return colorArr;
   } else {
     return [];
   }
+};
+
+// formatNeighbourhoodCoords
+// takes an array of lat long objects and
+// converts to a colon separated string
+export const formatNeighourhoodCoords = (
+  array: NeighbourhoodCoords[] | []
+): string => {
+  let coordString: string = '';
+  if (array.length > 0) {
+    const coords = array.forEach((coord) => {
+      coordString += coord.latitude + ',' + coord.longitude + ':';
+    });
+  } else {
+    return '';
+  }
+  return coordString.slice(0, -1);
 };

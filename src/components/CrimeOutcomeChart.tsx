@@ -6,7 +6,7 @@ const CrimeOutcomeChart = ({ crime }: CrimeChartProps) => {
   const chartObj = crimeOutcomeLookup(crime);
   const keysArray = Object.keys(chartObj);
   const valuesArray = Object.values(chartObj);
-  const colours = randomColorGenerator(valuesArray);
+  const colours = randomColorGenerator(valuesArray.length);
 
   // chart data object
   const data = {

@@ -5,6 +5,7 @@ import {
   formatPolyData,
   formatAreaCoords,
   randomColorGenerator,
+  formatNeighourhoodCoords,
 } from '../utils/functions';
 
 describe('formatMonth()', () => {
@@ -383,12 +384,12 @@ describe('formatAreaCoords()', () => {
 });
 
 describe('randomColorGenerator()', () => {
-  test('when passed an empty array, returns and empty array', () => {
-    const input: [] = [];
+  test('when passed 0, returns an empty array', () => {
+    const input: number = 0;
     expect(randomColorGenerator(input)).toEqual([]);
   });
-  test('returns one random hex color string in an array when passed a single item array', () => {
-    const input: number[] = [1];
+  test('returns one random hex color string in an array when passed a number 1', () => {
+    const input: number = 1;
     const expected = [expect.stringMatching(/^\#[A-Za-z0-9]/)];
     expect(randomColorGenerator(input)).toHaveLength(1);
     const colorArr = randomColorGenerator(input);
@@ -396,13 +397,81 @@ describe('randomColorGenerator()', () => {
     expect(colorArr).toEqual(expect.arrayContaining(expected));
   });
   test('returns mulitple hex colour strings in a single array when passed an array with multiple values', () => {
-    const input: number[] = [1, 2, 3];
+    const input: number = 3;
     const colorArr = randomColorGenerator(input);
     expect(colorArr).toHaveLength(3);
   });
+  // test('values in the hex color array are not the same', () => {
+  //   const input: number = 10;
+  //   const colorArr = randomColorGenerator(input);
+  //   for (let i = 0; i < colorArr.length; i++) {
+  //     const colorCheck = colorArr.every((color) => color !== colorArr[i]);
+  //     expect(colorCheck).toEqual(true);
+  //   }
+  // });
+});
+
+describe('formatNeighbourhoodCoords()', () => {
+  test('returns an empty string when passed an empty array', () => {
+    const input: [] = [];
+    expect(formatNeighourhoodCoords(input)).toBe('');
+  });
+  test('returns a string when passed an array with a single item object', () => {
+    const input: NeighbourhoodCoords[] = [
+      {
+        latitude: '53.375032',
+        longitude: '-2.02148',
+      },
+    ];
+    expect(formatNeighourhoodCoords(input)).toBe('53.375032,-2.02148');
+  });
+  test('works for mulitple objects in the array and adds a colon between each pair of coords', () => {
+    const input: NeighbourhoodCoords[] = [
+      {
+        latitude: '53.375032',
+        longitude: '-2.02148',
+      },
+      {
+        latitude: '53.375521',
+        longitude: '-2.02157',
+      },
+    ];
+    const input2: NeighbourhoodCoords[] = [
+      {
+        latitude: '53.375032',
+        longitude: '-2.02148',
+      },
+      {
+        latitude: '53.375521',
+        longitude: '-2.02157',
+      },
+      {
+        latitude: '53.375672',
+        longitude: '-2.021625',
+      },
+      {
+        latitude: '53.37576',
+        longitude: '-2.021712',
+      },
+    ];
+    expect(formatNeighourhoodCoords(input)).toBe(
+      '53.375032,-2.02148:53.375521,-2.02157'
+    );
+    expect(formatNeighourhoodCoords(input2)).toBe(
+      '53.375032,-2.02148:53.375521,-2.02157:53.375672,-2.021625:53.37576,-2.021712'
+    );
+  });
   test('does not mutate original array', () => {
-    const input: number[] = [1];
-    randomColorGenerator(input);
-    expect(input[0]).toEqual(1);
+    const input: NeighbourhoodCoords[] = [
+      {
+        latitude: '53.375032',
+        longitude: '-2.02148',
+      },
+    ];
+    formatNeighourhoodCoords(input);
+    expect(input[0]).toEqual({
+      latitude: '53.375032',
+      longitude: '-2.02148',
+    });
   });
 });

@@ -48,3 +48,8 @@ type CrimeCardProps = {
 type CrimeChartProps = {
   crime: Incident[];
 };
+
+type NeighbourhoodCoords = {
+  latitude: string;
+  longitude: string;
+};
