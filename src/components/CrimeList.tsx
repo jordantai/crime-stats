@@ -1,12 +1,14 @@
-import React, { Component, MouseEvent } from 'react';
+import React, { Component, MouseEvent, useState } from 'react';
 import * as api from '../utils/api';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { formatMonth, crimeCategoryLookup } from '../utils/functions';
 import CrimeCard from './CrimeCard';
 import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
-import { formatAreaCoords, formatNeighourhoodCoords } from '../utils/functions';
-import { stockportAreaCoords } from '../utils/stockportAreaCoords';
-import { buryAreaCoords } from '../utils/buryAreaCoords';
+import { formatAreaCoords, formatDate } from '../utils/functions';
+import { stockportAreaCoords } from '../data/stockportAreaCoords';
+import { buryAreaCoords } from '../data/buryAreaCoords';
 
 class CrimeList extends Component {
   state: CrimeListState = {
@@ -16,12 +18,17 @@ class CrimeList extends Component {
     mapCoords:
       '53.377494,-2.066427:53.396118,-2.090278:53.411600,-2.054972:53.403322,-2.034651',
     boroughName: '',
+    startDate: new Date(),
   };
 
   componentDidUpdate(prevProps: any, prevState: CrimeListState) {
-    const { mapCoords } = this.state;
+    const { mapCoords, startDate } = this.state;
     const mapCoordsHaveChanged = prevState.mapCoords !== mapCoords;
+    const monthAndYearHasChanged = prevState.startDate !== startDate;
     if (mapCoordsHaveChanged) {
+      this.getCrimes();
+    }
+    if (monthAndYearHasChanged) {
       this.getCrimes();
     }
   }
@@ -32,7 +39,8 @@ class CrimeList extends Component {
   }
 
   getCrimes = () => {
-    const { monthAndYear, mapCoords } = this.state;
+    const { mapCoords, startDate } = this.state;
+    const monthAndYear = formatDate(startDate);
     api.fetchCrimes(monthAndYear, mapCoords).then((data) => {
       this.setState({
         crime: data,
@@ -57,6 +65,10 @@ class CrimeList extends Component {
     }
   };
 
+  handleDateChange = (date: Date) => {
+    this.setState({ startDate: date });
+  };
+
   // getNeighbourhoodCoords = () => {
   //   api.fetchNeighbourhoodCoords().then((data) => {
   //     const neighbourhoodCoords = formatNeighourhoodCoords(data);
@@ -65,9 +77,9 @@ class CrimeList extends Component {
   // };
 
   render() {
-    const { crime, isLoading, boroughName } = this.state;
+    const { crime, isLoading, boroughName, startDate } = this.state;
+    if (isLoading) return <h2>Loading...</h2>;
     console.log(this.state);
-    if (isLoading) return <h3>Loading...</h3>;
     return (
       <main>
         <h2>{boroughName}</h2>
@@ -78,6 +90,12 @@ class CrimeList extends Component {
           Bury
         </button>
         {/* <h3>{formatMonth(crime[0].month)}</h3> */}
+        <DatePicker
+          selected={startDate}
+          onChange={this.handleDateChange}
+          dateFormat="MM/yyyy"
+          showMonthYearPicker
+        />
         <section>
           <ul>
             {/* {crime.map((incident) => {

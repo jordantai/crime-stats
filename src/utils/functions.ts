@@ -105,3 +105,18 @@ export const formatNeighourhoodCoords = (
   }
   return coordString.slice(0, -1);
 };
+
+// formatDate()
+// Takes a date object and returns a string  version of the month and year only in format: yyyy/mm
+export const formatDate = (date?: Date) => {
+  if (date) {
+    const dateYear = date.toLocaleString('default', {
+      year: 'numeric',
+    });
+    const dateMonth = date.toLocaleString('default', { month: '2-digit' });
+    const dateStr = dateYear + '-' + dateMonth;
+    return dateStr;
+  } else {
+    return '';
+  }
+};

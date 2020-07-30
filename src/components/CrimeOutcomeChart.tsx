@@ -19,11 +19,16 @@ const CrimeOutcomeChart = ({ crime }: CrimeChartProps) => {
       },
     ],
   };
+  const options = {
+    legend: {
+      position: 'left',
+    },
+  };
 
   return (
     <div>
       <h2>Outcome Wheel</h2>
-      <Doughnut data={data} />
+      <Doughnut data={data} options={options} />
     </div>
   );
 };

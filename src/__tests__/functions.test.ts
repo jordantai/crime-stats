@@ -6,6 +6,7 @@ import {
   formatAreaCoords,
   randomColorGenerator,
   formatNeighourhoodCoords,
+  formatDate,
 } from '../utils/functions';
 
 describe('formatMonth()', () => {
@@ -473,5 +474,21 @@ describe('formatNeighbourhoodCoords()', () => {
       latitude: '53.375032',
       longitude: '-2.02148',
     });
+  });
+});
+
+describe('formatDate()', () => {
+  test('if passed nothing returns an empty string', () => {
+    expect(formatDate()).toBe('');
+  });
+  test('when passed a date object returns a string version of that object', () => {
+    const input: Date = new Date();
+    const result = formatDate(input);
+    expect(typeof result).toBe('string');
+    expect(result.length).toBeGreaterThan(0);
+  });
+  test('date string is returned in format yyyy-mm', () => {
+    const input: Date = new Date();
+    expect(formatDate(input)).toBe('2020-07');
   });
 });

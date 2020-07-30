@@ -32,6 +32,7 @@ type CrimeListState = {
   monthAndYear: string;
   mapCoords: string;
   boroughName: string;
+  startDate: Date;
 };
 
 type CrimeCategoryLookupObject = {
