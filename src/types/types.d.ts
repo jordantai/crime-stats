@@ -49,6 +49,7 @@ type CrimeCardProps = {
 
 type CrimeChartProps = {
   crime: Incident[];
+  startDate: Date;
 };
 
 type NeighbourhoodCoords = {

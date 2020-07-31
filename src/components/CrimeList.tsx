@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent, useState } from 'react';
+import React, { Component, MouseEvent } from 'react';
 import * as api from '../utils/api';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,16 +7,14 @@ import CrimeCard from './CrimeCard';
 import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
 import { formatAreaCoords, formatDate } from '../utils/functions';
-import { stockportAreaCoords } from '../data/stockportAreaCoords';
-import { buryAreaCoords } from '../data/buryAreaCoords';
+import { areaCoords } from '../data/areaCoords';
 
 class CrimeList extends Component {
   state: CrimeListState = {
     crime: [],
     isLoading: true,
     monthAndYear: '2019-02',
-    mapCoords:
-      '53.377494,-2.066427:53.396118,-2.090278:53.411600,-2.054972:53.403322,-2.034651',
+    mapCoords: '',
     boroughName: '',
     startDate: new Date(),
   };
@@ -54,14 +52,20 @@ class CrimeList extends Component {
     const target = event.target as HTMLButtonElement;
     const borough = target.value;
     if (borough === 'stockport') {
-      const stockport = formatAreaCoords(stockportAreaCoords);
+      const stockport = formatAreaCoords(areaCoords.stockport);
       this.setState({
         mapCoords: stockport,
         boroughName: borough.toUpperCase(),
       });
     } else if (borough === 'bury') {
-      const bury = formatAreaCoords(buryAreaCoords);
+      const bury = formatAreaCoords(areaCoords.bury);
       this.setState({ mapCoords: bury, boroughName: borough.toUpperCase() });
+    } else if (borough === 'trafford') {
+      const trafford = formatAreaCoords(areaCoords.trafford);
+      this.setState({
+        mapCoords: trafford,
+        boroughName: borough.toUpperCase(),
+      });
     }
   };
 
@@ -89,6 +93,9 @@ class CrimeList extends Component {
         <button value="bury" onClick={this.handleClick}>
           Bury
         </button>
+        <button value="trafford" onClick={this.handleClick}>
+          Trafford
+        </button>
         {/* <h3>{formatMonth(crime[0].month)}</h3> */}
         <DatePicker
           selected={startDate}
@@ -104,8 +111,8 @@ class CrimeList extends Component {
           </ul>
         </section>
         <section>
-          <CrimeCategoryChart crime={crime} />
-          <CrimeOutcomeChart crime={crime} />
+          <CrimeCategoryChart crime={crime} startDate={startDate} />
+          <CrimeOutcomeChart crime={crime} startDate={startDate} />
         </section>
       </main>
     );
