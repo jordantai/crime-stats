@@ -31,7 +31,7 @@ type CrimeListState = {
   isLoading: boolean;
   monthAndYear: string;
   mapCoords: string;
-  boroughName: string;
+  boroughName?: string;
   startDate: Date;
 };
 
@@ -55,4 +55,8 @@ type CrimeChartProps = {
 type NeighbourhoodCoords = {
   latitude: string;
   longitude: string;
+};
+
+type AreaCoords = {
+  [key: string]: number[][];
 };

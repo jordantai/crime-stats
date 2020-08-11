@@ -8,25 +8,34 @@ import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
 import { formatAreaCoords, formatDate } from '../utils/functions';
 import { areaCoords } from '../data/areaCoords';
+import { RouteComponentProps } from '@reach/router';
 
-class CrimeList extends Component {
+interface CrimeListProps extends RouteComponentProps {
+  boroughName?: string;
+}
+
+class CrimeList extends Component<CrimeListProps> {
   state: CrimeListState = {
     crime: [],
     isLoading: true,
-    monthAndYear: '2019-02',
+    monthAndYear: '',
+    boroughName: this.props.boroughName,
+    startDate: new Date('February 01, 2018 00:00:01'),
     mapCoords: '',
-    boroughName: '',
-    startDate: new Date(),
   };
 
-  componentDidUpdate(prevProps: any, prevState: CrimeListState) {
-    const { mapCoords, startDate } = this.state;
+  componentDidUpdate(prevProps: CrimeListProps, prevState: CrimeListState) {
+    const { mapCoords, startDate, boroughName } = this.state;
+    const boroughHasChanged = prevState.boroughName !== boroughName;
     const mapCoordsHaveChanged = prevState.mapCoords !== mapCoords;
     const monthAndYearHasChanged = prevState.startDate !== startDate;
     if (mapCoordsHaveChanged) {
       this.getCrimes();
     }
     if (monthAndYearHasChanged) {
+      this.getCrimes();
+    }
+    if (boroughHasChanged) {
       this.getCrimes();
     }
   }
@@ -37,7 +46,9 @@ class CrimeList extends Component {
   }
 
   getCrimes = () => {
-    const { mapCoords, startDate } = this.state;
+    const { boroughName } = this.props;
+    const { startDate } = this.state;
+    const mapCoords: string = formatAreaCoords(areaCoords[boroughName!]);
     const monthAndYear = formatDate(startDate);
     api.fetchCrimes(monthAndYear, mapCoords).then((data) => {
       this.setState({
@@ -55,16 +66,16 @@ class CrimeList extends Component {
       const stockport = formatAreaCoords(areaCoords.stockport);
       this.setState({
         mapCoords: stockport,
-        boroughName: borough.toUpperCase(),
+        boroughName: borough,
       });
     } else if (borough === 'bury') {
       const bury = formatAreaCoords(areaCoords.bury);
-      this.setState({ mapCoords: bury, boroughName: borough.toUpperCase() });
+      this.setState({ mapCoords: bury, boroughName: borough });
     } else if (borough === 'trafford') {
       const trafford = formatAreaCoords(areaCoords.trafford);
       this.setState({
         mapCoords: trafford,
-        boroughName: borough.toUpperCase(),
+        boroughName: borough,
       });
     }
   };
@@ -84,6 +95,7 @@ class CrimeList extends Component {
     const { crime, isLoading, boroughName, startDate } = this.state;
     if (isLoading) return <h2>Loading...</h2>;
     console.log(this.state);
+    console.log(this.props);
     return (
       <main>
         <h2>{boroughName}</h2>
