@@ -75,27 +75,36 @@ class CrimeList extends Component {
     const { crime, isLoading, boroughName, startDate } = this.state;
     if (isLoading) return <h2>Loading...</h2>;
     console.log(this.state);
+
+    let crimeChart;
+    let crimeOutcomes;
+    if (crime.length !== 0) {
+      crimeChart = <CrimeCategoryChart crime={crime} startDate={startDate} />;
+      crimeOutcomes = <CrimeOutcomeChart crime={crime} startDate={startDate} />;
+    }
+
     return (
       <main>
+        <nav>
+          <button value="stockport" onClick={this.handleClick}>
+            Stockport
+          </button>
+          <button value="bury" onClick={this.handleClick}>
+            Bury
+          </button>
+          <button value="trafford" onClick={this.handleClick}>
+            Trafford
+          </button>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => this.handleDateChange(date)}
+            minDate={subDays(new Date(), 770)}
+            maxDate={addDays(new Date(), -60)}
+            dateFormat="MM/yyyy"
+            showMonthYearPicker
+          />
+        </nav>
         <h2>{boroughName}</h2>
-        <button value="stockport" onClick={this.handleClick}>
-          Stockport
-        </button>
-        <button value="bury" onClick={this.handleClick}>
-          Bury
-        </button>
-        <button value="trafford" onClick={this.handleClick}>
-          Trafford
-        </button>
-        {/* <h3>{formatMonth(crime[0].month)}</h3> */}
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => this.handleDateChange(date)}
-          minDate={subDays(new Date(), 770)}
-          maxDate={addDays(new Date(), -60)}
-          dateFormat="MM/yyyy"
-          showMonthYearPicker
-        />
         <section>
           <ul>
             {/* {crime.map((incident) => {
@@ -104,8 +113,8 @@ class CrimeList extends Component {
           </ul>
         </section>
         <section>
-          <CrimeCategoryChart crime={crime} startDate={startDate} />
-          <CrimeOutcomeChart crime={crime} startDate={startDate} />
+          {crimeChart}
+          {crimeOutcomes}
         </section>
       </main>
     );
