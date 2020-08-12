@@ -59,22 +59,11 @@ class CrimeList extends Component {
     event.preventDefault();
     const target = event.target as HTMLButtonElement;
     const borough = target.value;
-    if (borough === 'stockport') {
-      const stockport = formatAreaCoords(areaCoords.stockport);
-      this.setState({
-        mapCoords: stockport,
-        boroughName: borough,
-      });
-    } else if (borough === 'bury') {
-      const bury = formatAreaCoords(areaCoords.bury);
-      this.setState({ mapCoords: bury, boroughName: borough });
-    } else if (borough === 'trafford') {
-      const trafford = formatAreaCoords(areaCoords.trafford);
-      this.setState({
-        mapCoords: trafford,
-        boroughName: borough,
-      });
-    }
+    const newMapCoords = formatAreaCoords(areaCoords[borough]);
+    this.setState({
+      mapCoords: newMapCoords,
+      boroughName: borough,
+    });
   };
 
   handleDateChange = (date: Date) => {
