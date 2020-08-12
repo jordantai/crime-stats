@@ -8,27 +8,21 @@ import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
 import { formatAreaCoords, formatDate } from '../utils/functions';
 import { areaCoords } from '../data/areaCoords';
-import { RouteComponentProps } from '@reach/router';
 
-interface CrimeListProps extends RouteComponentProps {
-  boroughName?: string;
-}
-
-class CrimeList extends Component<CrimeListProps> {
+class CrimeList extends Component {
   state: CrimeListState = {
     crime: [],
     isLoading: true,
-    monthAndYear: '',
-    boroughName: this.props.boroughName,
-    startDate: new Date('February 01, 2018 00:00:01'),
     mapCoords: '',
+    boroughName: '',
+    startDate: new Date(),
   };
 
-  componentDidUpdate(prevProps: CrimeListProps, prevState: CrimeListState) {
+  componentDidUpdate(prevProps: any, prevState: CrimeListState) {
     const { mapCoords, startDate, boroughName } = this.state;
-    const boroughHasChanged = prevState.boroughName !== boroughName;
     const mapCoordsHaveChanged = prevState.mapCoords !== mapCoords;
     const monthAndYearHasChanged = prevState.startDate !== startDate;
+    const boroughHasChanged = prevState.boroughName !== boroughName;
     if (mapCoordsHaveChanged) {
       this.getCrimes();
     }
@@ -46,16 +40,19 @@ class CrimeList extends Component<CrimeListProps> {
   }
 
   getCrimes = () => {
-    const { boroughName } = this.props;
-    const { startDate } = this.state;
-    const mapCoords: string = formatAreaCoords(areaCoords[boroughName!]);
-    const monthAndYear = formatDate(startDate);
-    api.fetchCrimes(monthAndYear, mapCoords).then((data) => {
-      this.setState({
-        crime: data,
-        isLoading: false,
+    const { startDate, boroughName } = this.state;
+    if (boroughName !== '') {
+      const monthAndYear = formatDate(startDate);
+      const mapCoords: string = formatAreaCoords(areaCoords[boroughName!]);
+      api.fetchCrimes(monthAndYear, mapCoords).then((data) => {
+        this.setState({
+          crime: data,
+          isLoading: false,
+        });
       });
-    });
+    } else {
+      this.setState({ isLoading: false });
+    }
   };
 
   handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -84,18 +81,10 @@ class CrimeList extends Component<CrimeListProps> {
     this.setState({ startDate: date });
   };
 
-  // getNeighbourhoodCoords = () => {
-  //   api.fetchNeighbourhoodCoords().then((data) => {
-  //     const neighbourhoodCoords = formatNeighourhoodCoords(data);
-  //     this.setState({ neighbourhoodCoords });
-  //   });
-  // };
-
   render() {
     const { crime, isLoading, boroughName, startDate } = this.state;
     if (isLoading) return <h2>Loading...</h2>;
     console.log(this.state);
-    console.log(this.props);
     return (
       <main>
         <h2>{boroughName}</h2>
