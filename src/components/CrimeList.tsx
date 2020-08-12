@@ -1,6 +1,7 @@
 import React, { Component, MouseEvent } from 'react';
 import * as api from '../utils/api';
 import DatePicker from 'react-datepicker';
+import { subDays, addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import { formatMonth, crimeCategoryLookup } from '../utils/functions';
 import CrimeCard from './CrimeCard';
@@ -15,7 +16,7 @@ class CrimeList extends Component {
     isLoading: true,
     mapCoords: '',
     boroughName: '',
-    startDate: new Date(),
+    startDate: new Date('2019'),
   };
 
   componentDidUpdate(prevProps: any, prevState: CrimeListState) {
@@ -66,7 +67,7 @@ class CrimeList extends Component {
     });
   };
 
-  handleDateChange = (date: Date) => {
+  handleDateChange = (date: Date | null) => {
     this.setState({ startDate: date });
   };
 
@@ -89,7 +90,9 @@ class CrimeList extends Component {
         {/* <h3>{formatMonth(crime[0].month)}</h3> */}
         <DatePicker
           selected={startDate}
-          onChange={this.handleDateChange}
+          onChange={(date) => this.handleDateChange(date)}
+          minDate={subDays(new Date(), 770)}
+          maxDate={addDays(new Date(), -60)}
           dateFormat="MM/yyyy"
           showMonthYearPicker
         />
