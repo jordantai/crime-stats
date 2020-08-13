@@ -7,6 +7,7 @@ import {
   randomColorGenerator,
   formatNeighourhoodCoords,
   formatDate,
+  formatNumberCoords,
 } from '../utils/functions';
 
 describe('formatMonth()', () => {
@@ -490,5 +491,40 @@ describe('formatDate()', () => {
   test('date string is returned in format yyyy-mm', () => {
     const input: Date = new Date();
     expect(formatDate(input)).toBe('2020-07');
+  });
+});
+
+describe.only('formatNumberCoords', () => {
+  test('when passed an empty array returns an empty array', () => {
+    const input: number[] = [];
+    expect(formatNumberCoords(input)).toEqual([]);
+  });
+  test('rounds down a coordinate to 6 decimals and returns in a nested array', () => {
+    const input: number[] = [53.64559752100133];
+    expect(formatNumberCoords(input)).toEqual([[53.645598]]);
+  });
+  test('works for 2 coordinates', () => {
+    const input: number[] = [53.64559752100133, -2.438056631789143];
+    expect(formatNumberCoords(input)).toEqual([[53.645598, -2.438057]]);
+  });
+  test('works for mulitple coordinate pairs and puts each pait into its own array', () => {
+    const input: number[] = [
+      53.64559752100133,
+      -2.438056631789143,
+      53.6408146655336,
+      -2.4485279757832834,
+      53.627786266417964,
+      -2.449214621291096,
+    ];
+    expect(formatNumberCoords(input)).toEqual([
+      [53.645598, -2.438057],
+      [53.640815, -2.448528],
+      [53.627786, -2.449215],
+    ]);
+  });
+  test('does not mutate original array', () => {
+    const input: number[] = [53.64559752100133, -2.438056631789143];
+    formatNumberCoords(input);
+    expect(input).toEqual([53.64559752100133, -2.438056631789143]);
   });
 });

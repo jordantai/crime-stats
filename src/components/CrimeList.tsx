@@ -3,7 +3,6 @@ import * as api from '../utils/api';
 import DatePicker from 'react-datepicker';
 import { subDays, addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
-import { formatMonth, crimeCategoryLookup } from '../utils/functions';
 import CrimeCard from './CrimeCard';
 import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
@@ -89,6 +88,7 @@ class CrimeList extends Component {
           <button value="stockport" onClick={this.handleClick}>
             Stockport
           </button>
+
           <button value="bury" onClick={this.handleClick}>
             Bury
           </button>

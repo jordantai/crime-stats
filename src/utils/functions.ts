@@ -120,3 +120,28 @@ export const formatDate = (date?: Date) => {
     return '';
   }
 };
+
+// formatNumberCoords()
+// Takes a number of coords and formats them into an array
+export const formatNumberCoords = (array: number[]) => {
+  if (array.length !== 0) {
+    let evensArr = [];
+    let oddsArr = [];
+    for (let i = 0; i < array.length; i++) {
+      if (i % 2 === 0) {
+        evensArr.push([+array[i].toFixed(6)]);
+      }
+      if (i % 2 === 1) {
+        oddsArr.push(+array[i].toFixed(6));
+      }
+    }
+
+    if (oddsArr.length !== 0) {
+      for (let i = 0; i < evensArr.length; i++) {
+        evensArr[i].push(oddsArr[i]);
+      }
+    }
+    console.log(array);
+    return evensArr;
+  } else return [];
+};
