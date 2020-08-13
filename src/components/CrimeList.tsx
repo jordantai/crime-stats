@@ -101,6 +101,12 @@ class CrimeList extends Component {
           <button value="oldham" onClick={this.handleClick}>
             Oldham
           </button>
+          <button value="tameside" onClick={this.handleClick}>
+            Tameside
+          </button>
+          <button value="city" onClick={this.handleClick}>
+            City Centre
+          </button>
 
           <DatePicker
             selected={startDate}
