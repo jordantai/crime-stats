@@ -98,6 +98,9 @@ class CrimeList extends Component {
           <button value="bolton" onClick={this.handleClick}>
             Bolton
           </button>
+          <button value="rochdale" onClick={this.handleClick}>
+            Rochdale
+          </button>
           <button value="oldham" onClick={this.handleClick}>
             Oldham
           </button>
@@ -106,6 +109,12 @@ class CrimeList extends Component {
           </button>
           <button value="city" onClick={this.handleClick}>
             City Centre
+          </button>
+          <button value="salford" onClick={this.handleClick}>
+            Salford
+          </button>
+          <button value="wigan" onClick={this.handleClick}>
+            Wigan
           </button>
 
           <DatePicker

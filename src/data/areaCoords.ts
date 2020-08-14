@@ -5,6 +5,9 @@ import { boltonAreaCoords } from './boltonAreaCoords';
 import { oldhamAreaCoords } from './oldhamAreaCoords';
 import { tamesideAreaCoords } from './tamesideAreaCoords';
 import { cityAreaCoords } from './cityAreaCoords';
+import { rochdaleAreaCoords } from './rochdaleAreaCoords';
+import { wiganAreaCoords } from './wiganAreaCoords';
+import { salfordAreaCoords } from './salfordAreaCoords';
 
 export const areaCoords: AreaCoords = {
   bury: [...buryAreaCoords],
@@ -14,4 +17,7 @@ export const areaCoords: AreaCoords = {
   oldham: [...oldhamAreaCoords],
   tameside: [...tamesideAreaCoords],
   city: [...cityAreaCoords],
+  rochdale: [...rochdaleAreaCoords],
+  wigan: [...wiganAreaCoords],
+  salford: [...salfordAreaCoords],
 };
