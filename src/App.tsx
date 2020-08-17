@@ -1,13 +1,16 @@
 import React from 'react';
 import './App.css';
 import Title from './components/Title';
+import CrimeList from './components/CrimeList';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
+    <div>
       <Title />
+
+      <CrimeList />
     </div>
   );
-}
+};
 
 export default App;
