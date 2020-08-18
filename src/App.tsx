@@ -31,7 +31,7 @@ class App extends Component {
           dateFormat="MM/yyyy"
           showMonthYearPicker
         />
-        <Router>
+        <Router primary={false}>
           <CrimeList path="/borough/:boroughName" startDate={startDate} />
         </Router>
       </div>
