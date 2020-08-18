@@ -88,8 +88,8 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
 
     return (
       <main>
-        {/* <nav>
-          <button value="stockport" onClick={this.handleClick}>
+        <nav>
+          {/* <button value="stockport" onClick={this.handleClick}>
             Stockport
           </button>
           <button value="bury" onClick={this.handleClick}>
@@ -118,7 +118,7 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
           </button>
           <button value="wigan" onClick={this.handleClick}>
             Wigan
-          </button>
+          </button> */}
 
           <DatePicker
             selected={startDate}
@@ -128,7 +128,7 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
             dateFormat="MM/yyyy"
             showMonthYearPicker
           />
-        </nav> */}
+        </nav>
         <h2>{boroughName}</h2>
         <section>
           <ul>
