@@ -12,6 +12,7 @@ import { areaCoords } from '../data/areaCoords';
 
 interface CrimeListProps {
   boroughName?: string;
+  startDate: Date;
 }
 
 class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
@@ -19,14 +20,13 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
     crime: [],
     isLoading: true,
     mapCoords: '',
-    startDate: new Date('2019'),
   };
 
   componentDidUpdate(prevProps: CrimeListProps, prevState: CrimeListState) {
-    const { mapCoords, startDate } = this.state;
-    const { boroughName } = this.props;
+    const { mapCoords } = this.state;
+    const { boroughName, startDate } = this.props;
     const mapCoordsHaveChanged = prevState.mapCoords !== mapCoords;
-    const monthAndYearHasChanged = prevState.startDate !== startDate;
+    const monthAndYearHasChanged = prevProps.startDate !== startDate;
     const boroughHasChanged = prevProps.boroughName !== boroughName;
     if (mapCoordsHaveChanged) {
       this.getCrimes();
@@ -45,8 +45,8 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
   }
 
   getCrimes = () => {
-    const { startDate } = this.state;
-    const { boroughName } = this.props;
+    // const { startDate } = this.state;
+    const { boroughName, startDate } = this.props;
     const monthAndYear = formatDate(startDate);
     const mapCoords: string = formatAreaCoords(areaCoords[boroughName!]);
     api.fetchCrimes(monthAndYear, mapCoords).then((data) => {
@@ -74,8 +74,8 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
 
   render() {
     console.log(this.props.boroughName);
-    const { boroughName } = this.props;
-    const { crime, isLoading, startDate } = this.state;
+    const { boroughName, startDate } = this.props;
+    const { crime, isLoading } = this.state;
     if (isLoading) return <h2>Loading...</h2>;
     console.log(this.state);
 
@@ -120,14 +120,14 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
             Wigan
           </button> */}
 
-          <DatePicker
+          {/* <DatePicker
             selected={startDate}
             onChange={(date) => this.handleDateChange(date)}
             minDate={subDays(new Date(), 770)}
             maxDate={addDays(new Date(), -60)}
             dateFormat="MM/yyyy"
             showMonthYearPicker
-          />
+          /> */}
         </nav>
         <h2>{boroughName}</h2>
         <section>
