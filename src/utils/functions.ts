@@ -141,7 +141,6 @@ export const formatNumberCoords = (array: number[]) => {
         evensArr[i].push(oddsArr[i]);
       }
     }
-    console.log(array);
     return evensArr;
   } else return [];
 };

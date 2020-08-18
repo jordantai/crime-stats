@@ -30,8 +30,6 @@ type CrimeListState = {
   crime: Incident[];
   isLoading: boolean;
   mapCoords: string;
-  boroughName?: string;
-  startDate: Date;
 };
 
 type CrimeCategoryLookupObject = {

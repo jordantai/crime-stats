@@ -8,6 +8,8 @@ const CrimeCategoryChart = ({ crime, startDate }: CrimeChartProps) => {
   const valuesArray = Object.values(chartObj);
   const colors = randomColorGenerator(valuesArray.length);
 
+  console.log(colors + '.....loaded');
+
   //Chart data object
   const data = {
     labels: [...keysArray],
