@@ -33,8 +33,8 @@ class App extends Component {
           showMonthYearPicker
         />
         <h4>
-          * Crime figures are updated monthly by the Police and stats are
-          limited for any month within the last year.
+          *Crime figures are updated monthly by the Police and stats are limited
+          for any month within the last year.
         </h4>
         <Router primary={false}>
           <CrimeList path="/borough/:boroughName" startDate={startDate} />
