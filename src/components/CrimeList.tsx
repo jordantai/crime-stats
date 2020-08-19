@@ -3,6 +3,7 @@ import { RouteComponentProps } from '@reach/router';
 import * as api from '../utils/api';
 import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
+import ErrorDisplay from './ErrorDisplay';
 import { formatAreaCoords, formatDate } from '../utils/functions';
 import { areaCoords } from '../data/areaCoords';
 
@@ -11,6 +12,7 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
     crime: [],
     isLoading: true,
     mapCoords: '',
+    err: '',
   };
 
   componentDidUpdate(prevProps: CrimeListProps, prevState: CrimeListState) {
@@ -37,14 +39,22 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
 
   getCrimes = () => {
     const { boroughName, startDate } = this.props;
-    const monthAndYear = formatDate(startDate);
+    // const monthAndYear = formatDate(startDate);
+    const monthAndYear = '2020-10';
     const mapCoords: string = formatAreaCoords(areaCoords[boroughName!]);
-    api.fetchCrimes(monthAndYear, mapCoords).then((data) => {
-      this.setState({
-        crime: data,
-        isLoading: false,
+    api
+      .fetchCrimes(monthAndYear, mapCoords)
+      .then((data) => {
+        this.setState({
+          crime: data,
+          isLoading: false,
+          err: '',
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ err: err.response.data.msg, isLoading: false });
       });
-    });
   };
 
   handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -64,14 +74,14 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
 
   render() {
     const { boroughName, startDate } = this.props;
+    const { crime, isLoading, err } = this.state;
     let borough = '';
     if (boroughName) {
       borough =
         boroughName[0].toUpperCase() + boroughName.slice(1, boroughName.length);
     }
-    const { crime, isLoading } = this.state;
     if (isLoading) return <h2>Loading...</h2>;
-
+    if (err) return <ErrorDisplay msg={err} />;
     return (
       <main>
         <h2>{borough}</h2>

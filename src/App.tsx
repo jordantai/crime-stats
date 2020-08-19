@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import DatePicker from 'react-datepicker';
 import { subDays, addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
+import ErrorDisplay from './components/ErrorDisplay';
 
 class App extends Component {
   state = {
@@ -38,6 +39,7 @@ class App extends Component {
         </h4>
         <Router primary={false}>
           <CrimeList path="/borough/:boroughName" startDate={startDate} />
+          <ErrorDisplay default msg="" />
         </Router>
       </div>
     );
