@@ -23,6 +23,7 @@ class App extends Component {
       <div>
         <Title />
         <NavBar />
+        <h3>Select a month to see the crime stats</h3>
         <DatePicker
           selected={startDate}
           onChange={(date) => this.handleDateChange(date)}
@@ -31,6 +32,10 @@ class App extends Component {
           dateFormat="MM/yyyy"
           showMonthYearPicker
         />
+        <h4>
+          *Crime figures are updated monthly by the Police and stats are limited
+          for any month within the last year.
+        </h4>
         <Router primary={false}>
           <CrimeList path="/borough/:boroughName" startDate={startDate} />
         </Router>
