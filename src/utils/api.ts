@@ -5,14 +5,10 @@ const policeApiRequest = axios.create({
 });
 
 export const fetchCrimes = async (monthAndYear: string, mapCoords: string) => {
-  try {
-    const { data } = await policeApiRequest.get(
-      `/crimes-street/all-crime?poly=${mapCoords}&date=${monthAndYear}`
-    );
-    return data;
-  } catch (error) {
-    console.log('error', error);
-  }
+  const { data } = await policeApiRequest.get(
+    `/crimes-street/all-crime?poly=${mapCoords}&date=${monthAndYear}`
+  );
+  return data;
 };
 
 export const fetchNeighbourhoodCoords = async () => {
