@@ -1,9 +1,6 @@
 import React, { Component, MouseEvent } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import * as api from '../utils/api';
-import DatePicker from 'react-datepicker';
-import { subDays, addDays } from 'date-fns';
-import 'react-datepicker/dist/react-datepicker.css';
 //import CrimeCard from './CrimeCard';
 import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
@@ -45,7 +42,6 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
   }
 
   getCrimes = () => {
-    // const { startDate } = this.state;
     const { boroughName, startDate } = this.props;
     const monthAndYear = formatDate(startDate);
     const mapCoords: string = formatAreaCoords(areaCoords[boroughName!]);
@@ -73,18 +69,17 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
   };
 
   render() {
-    console.log(this.props.boroughName);
     const { boroughName, startDate } = this.props;
     const { crime, isLoading } = this.state;
     if (isLoading) return <h2>Loading...</h2>;
     console.log(this.state);
 
-    let crimeChart;
-    let crimeOutcomes;
-    if (crime.length !== 0) {
-      crimeChart = <CrimeCategoryChart crime={crime} startDate={startDate} />;
-      crimeOutcomes = <CrimeOutcomeChart crime={crime} startDate={startDate} />;
-    }
+    // let crimeChart;
+    // let crimeOutcomes;
+    // if (crime.length !== 0) {
+    //   crimeChart = <CrimeCategoryChart crime={crime} startDate={startDate} />;
+    //   crimeOutcomes = <CrimeOutcomeChart crime={crime} startDate={startDate} />;
+    // }
 
     return (
       <main>
@@ -138,8 +133,8 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
           </ul>
         </section>
         <section>
-          {crimeChart}
-          {crimeOutcomes}
+          <CrimeCategoryChart crime={crime} startDate={startDate} />
+          <CrimeOutcomeChart crime={crime} startDate={startDate} />
         </section>
       </main>
     );
