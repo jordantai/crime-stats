@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from '@reach/router';
 
 const NavBar = () => {
@@ -10,7 +10,7 @@ const NavBar = () => {
       <Link to="/borough/bury">
         <button value="bury">Bury</button>
       </Link>
-      <Link to="/borough/city-centre">
+      <Link to="/borough/city">
         <button value="city">Manchester City Centre</button>
       </Link>
       <Link to="/borough/oldham">
