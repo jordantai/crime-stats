@@ -1,16 +1,10 @@
 import React, { Component, MouseEvent } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import * as api from '../utils/api';
-//import CrimeCard from './CrimeCard';
 import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
 import { formatAreaCoords, formatDate } from '../utils/functions';
 import { areaCoords } from '../data/areaCoords';
-
-interface CrimeListProps {
-  boroughName?: string;
-  startDate: Date;
-}
 
 class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
   state: CrimeListState = {
@@ -70,68 +64,17 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
 
   render() {
     const { boroughName, startDate } = this.props;
+    let borough = '';
+    if (boroughName) {
+      borough =
+        boroughName[0].toUpperCase() + boroughName.slice(1, boroughName.length);
+    }
     const { crime, isLoading } = this.state;
     if (isLoading) return <h2>Loading...</h2>;
-    console.log(this.state);
-
-    // let crimeChart;
-    // let crimeOutcomes;
-    // if (crime.length !== 0) {
-    //   crimeChart = <CrimeCategoryChart crime={crime} startDate={startDate} />;
-    //   crimeOutcomes = <CrimeOutcomeChart crime={crime} startDate={startDate} />;
-    // }
 
     return (
       <main>
-        <nav>
-          {/* <button value="stockport" onClick={this.handleClick}>
-            Stockport
-          </button>
-          <button value="bury" onClick={this.handleClick}>
-            Bury
-          </button>
-          <button value="trafford" onClick={this.handleClick}>
-            Trafford
-          </button>
-          <button value="bolton" onClick={this.handleClick}>
-            Bolton
-          </button>
-          <button value="rochdale" onClick={this.handleClick}>
-            Rochdale
-          </button>
-          <button value="oldham" onClick={this.handleClick}>
-            Oldham
-          </button>
-          <button value="tameside" onClick={this.handleClick}>
-            Tameside
-          </button>
-          <button value="city" onClick={this.handleClick}>
-            City Centre
-          </button>
-          <button value="salford" onClick={this.handleClick}>
-            Salford
-          </button>
-          <button value="wigan" onClick={this.handleClick}>
-            Wigan
-          </button> */}
-
-          {/* <DatePicker
-            selected={startDate}
-            onChange={(date) => this.handleDateChange(date)}
-            minDate={subDays(new Date(), 770)}
-            maxDate={addDays(new Date(), -60)}
-            dateFormat="MM/yyyy"
-            showMonthYearPicker
-          /> */}
-        </nav>
-        <h2>{boroughName}</h2>
-        <section>
-          <ul>
-            {/* {crime.map((incident) => {
-              return <CrimeCard key={incident.id} incident={incident} />;
-            })} */}
-          </ul>
-        </section>
+        <h2>{borough}</h2>
         <section>
           <CrimeCategoryChart crime={crime} startDate={startDate} />
           <CrimeOutcomeChart crime={crime} startDate={startDate} />

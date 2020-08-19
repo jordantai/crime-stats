@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { crimeOutcomeLookup, randomColorGenerator } from '../utils/functions';
 import { Doughnut } from 'react-chartjs-2';
 
@@ -6,7 +6,7 @@ const CrimeOutcomeChart = ({ crime }: CrimeChartProps) => {
   const chartObj = crimeOutcomeLookup(crime);
   const keysArray = Object.keys(chartObj);
   const valuesArray = Object.values(chartObj);
-  const colours = randomColorGenerator(valuesArray.length);
+  const colors = useRef(randomColorGenerator(50));
 
   // chart data object
   const data = {
@@ -14,8 +14,8 @@ const CrimeOutcomeChart = ({ crime }: CrimeChartProps) => {
     datasets: [
       {
         data: [...valuesArray],
-        backgroundColor: [...colours],
-        hoverBackgroundColor: [...colours],
+        backgroundColor: [...colors.current],
+        hoverBackgroundColor: [...colors.current],
       },
     ],
   };

@@ -40,6 +40,11 @@ type CrimeOutcomeLookupObject = {
   [key: string]: number;
 };
 
+type CrimeListProps = {
+  boroughName?: string;
+  startDate: Date;
+};
+
 type CrimeCardProps = {
   incident: Incident;
 };
