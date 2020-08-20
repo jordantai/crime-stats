@@ -1,9 +1,10 @@
 import React from 'react';
+import { Title } from './styled/index';
 
-const Title = () => {
+const Header = () => {
   return (
     <header>
-      <h1>Crime Stats MCR</h1>
+      <Title>Crime Stats MCR</Title>
       <h2>Historical crime information for all the boroughs of Manchester</h2>
     </header>
   );

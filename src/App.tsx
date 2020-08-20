@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Router } from '@reach/router';
-import Title from './components/Title';
+import Header from './components/Header';
 import CrimeList from './components/CrimeList';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
@@ -9,6 +9,7 @@ import DatePicker from 'react-datepicker';
 import { subDays, addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import ErrorDisplay from './components/ErrorDisplay';
+import { MainWrapper } from './components/styled/index';
 
 class App extends Component {
   state = {
@@ -22,8 +23,8 @@ class App extends Component {
   render() {
     const { startDate } = this.state;
     return (
-      <div>
-        <Title />
+      <MainWrapper>
+        <Header />
         <NavBar />
         <h3>Select a month to see the crime stats</h3>
         <DatePicker
@@ -43,7 +44,7 @@ class App extends Component {
           <CrimeList path="/borough/:boroughName" startDate={startDate} />
           <ErrorDisplay default />
         </Router>
-      </div>
+      </MainWrapper>
     );
   }
 }
