@@ -11,13 +11,13 @@ export const fetchCrimes = async (monthAndYear: string, mapCoords: string) => {
   return data;
 };
 
-export const fetchNeighbourhoodCoords = async () => {
-  try {
-    const { data } = await policeApiRequest.get(
-      `/greater-manchester/JC27/boundary`
-    );
-    return data;
-  } catch (error) {
-    console.log('error', error);
-  }
-};
+// export const fetchNeighbourhoodCoords = async () => {
+//   try {
+//     const { data } = await policeApiRequest.get(
+//       `/greater-manchester/JC27/boundary`
+//     );
+//     return data;
+//   } catch (error) {
+//     console.log('error', error);
+//   }
+// };

@@ -1,5 +1,5 @@
 import React, { Component, MouseEvent } from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, Redirect } from '@reach/router';
 import * as api from '../utils/api';
 import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
@@ -12,7 +12,6 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
     crime: [],
     isLoading: true,
     mapCoords: '',
-    err: '',
   };
 
   componentDidUpdate(prevProps: CrimeListProps, prevState: CrimeListState) {
@@ -39,22 +38,23 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
 
   getCrimes = () => {
     const { boroughName, startDate } = this.props;
-    // const monthAndYear = formatDate(startDate);
-    const monthAndYear = '2020-10';
-    const mapCoords: string = formatAreaCoords(areaCoords[boroughName!]);
-    api
-      .fetchCrimes(monthAndYear, mapCoords)
-      .then((data) => {
-        this.setState({
-          crime: data,
-          isLoading: false,
-          err: '',
+    const monthAndYear = formatDate(startDate);
+    if (areaCoords.hasOwnProperty(boroughName!)) {
+      const mapCoords: string = formatAreaCoords(areaCoords[boroughName!]);
+      api
+        .fetchCrimes(monthAndYear, mapCoords)
+        .then((data) => {
+          this.setState({
+            crime: data,
+            isLoading: false,
+          });
+        })
+        .catch((err) => {
+          this.setState({ err: 'error', isLoading: false });
         });
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setState({ err: err.response.data.msg, isLoading: false });
-      });
+    } else {
+      this.setState({ err: 'redirect', isLoading: false });
+    }
   };
 
   handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -81,7 +81,8 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
         boroughName[0].toUpperCase() + boroughName.slice(1, boroughName.length);
     }
     if (isLoading) return <h2>Loading...</h2>;
-    if (err) return <ErrorDisplay msg={err} />;
+    if (err === 'error') return <ErrorDisplay />;
+    else if (err === 'not exist') return <Redirect to="/" noThrow />;
     return (
       <main>
         <h2>{borough}</h2>
