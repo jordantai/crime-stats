@@ -49,7 +49,7 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
             isLoading: false,
           });
         })
-        .catch((err) => {
+        .catch(() => {
           this.setState({ err: 'error', isLoading: false });
         });
     } else {
@@ -82,7 +82,7 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
     }
     if (isLoading) return <h2>Loading...</h2>;
     if (err === 'error') return <ErrorDisplay />;
-    else if (err === 'not exist') return <Redirect to="/" noThrow />;
+    else if (err === 'redirect') return <Redirect to="/" noThrow />;
     return (
       <main>
         <h2>{borough}</h2>
