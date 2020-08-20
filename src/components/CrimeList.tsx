@@ -1,8 +1,9 @@
 import React, { Component, MouseEvent } from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, Redirect } from '@reach/router';
 import * as api from '../utils/api';
 import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
+import ErrorDisplay from './ErrorDisplay';
 import { formatAreaCoords, formatDate } from '../utils/functions';
 import { areaCoords } from '../data/areaCoords';
 
@@ -38,13 +39,22 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
   getCrimes = () => {
     const { boroughName, startDate } = this.props;
     const monthAndYear = formatDate(startDate);
-    const mapCoords: string = formatAreaCoords(areaCoords[boroughName!]);
-    api.fetchCrimes(monthAndYear, mapCoords).then((data) => {
-      this.setState({
-        crime: data,
-        isLoading: false,
-      });
-    });
+    if (areaCoords.hasOwnProperty(boroughName!)) {
+      const mapCoords: string = formatAreaCoords(areaCoords[boroughName!]);
+      api
+        .fetchCrimes(monthAndYear, mapCoords)
+        .then((data) => {
+          this.setState({
+            crime: data,
+            isLoading: false,
+          });
+        })
+        .catch(() => {
+          this.setState({ err: 'error', isLoading: false });
+        });
+    } else {
+      this.setState({ err: 'redirect', isLoading: false });
+    }
   };
 
   handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -64,14 +74,15 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
 
   render() {
     const { boroughName, startDate } = this.props;
+    const { crime, isLoading, err } = this.state;
     let borough = '';
     if (boroughName) {
       borough =
         boroughName[0].toUpperCase() + boroughName.slice(1, boroughName.length);
     }
-    const { crime, isLoading } = this.state;
     if (isLoading) return <h2>Loading...</h2>;
-
+    if (err === 'error') return <ErrorDisplay />;
+    else if (err === 'redirect') return <Redirect to="/" noThrow />;
     return (
       <main>
         <h2>{borough}</h2>

@@ -4,9 +4,11 @@ import { Router } from '@reach/router';
 import Title from './components/Title';
 import CrimeList from './components/CrimeList';
 import NavBar from './components/NavBar';
+import Home from './components/Home';
 import DatePicker from 'react-datepicker';
 import { subDays, addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
+import ErrorDisplay from './components/ErrorDisplay';
 
 class App extends Component {
   state = {
@@ -37,7 +39,9 @@ class App extends Component {
           for any month within the last year.
         </h4>
         <Router primary={false}>
+          <Home path="/" />
           <CrimeList path="/borough/:boroughName" startDate={startDate} />
+          <ErrorDisplay default />
         </Router>
       </div>
     );
