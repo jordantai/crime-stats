@@ -1,38 +1,39 @@
 import React from 'react';
 import { Link } from '@reach/router';
+import { NavButton } from './styled/index';
 
 const NavBar = () => {
   return (
     <nav>
       <Link to="/borough/bolton">
-        <button value="bolton">Bolton</button>
+        <NavButton value="bolton">Bolton</NavButton>
       </Link>
       <Link to="/borough/bury">
-        <button value="bury">Bury</button>
+        <NavButton value="bury">Bury</NavButton>
       </Link>
       <Link to="/borough/city">
-        <button value="city">Manchester City Centre</button>
+        <NavButton value="city">Manchester City Centre</NavButton>
       </Link>
       <Link to="/borough/oldham">
-        <button value="oldham">Oldham</button>
+        <NavButton value="oldham">Oldham</NavButton>
       </Link>
       <Link to="/borough/rochdale">
-        <button value="rochdale">Rochdale</button>
+        <NavButton value="rochdale">Rochdale</NavButton>
       </Link>
       <Link to="/borough/salford">
-        <button value="salford">Salford</button>
+        <NavButton value="salford">Salford</NavButton>
       </Link>
       <Link to="/borough/stockport">
-        <button value="stockport">Stockport</button>
+        <NavButton value="stockport">Stockport</NavButton>
       </Link>
       <Link to="/borough/tameside">
-        <button value="tameside">Tameside</button>
+        <NavButton value="tameside">Tameside</NavButton>
       </Link>
       <Link to="/borough/trafford">
-        <button value="trafford">Trafford</button>
+        <NavButton value="trafford">Trafford</NavButton>
       </Link>
       <Link to="/borough/wigan">
-        <button value="wigan">Wigan</button>
+        <NavButton value="wigan">Wigan</NavButton>
       </Link>
     </nav>
   );
