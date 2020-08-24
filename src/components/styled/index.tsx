@@ -96,10 +96,12 @@ export const DateSubText = styled.p`
 
 export const ChartsContainer = styled.section`
   margin-top: 2rem;
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 export const FooterContainer = styled.footer`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 0 0.5rem 0 0.5rem;
 `;

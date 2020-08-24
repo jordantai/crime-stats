@@ -23,6 +23,9 @@ const CrimeOutcomeChart = ({ crime }: CrimeChartProps) => {
     legend: {
       position: 'bottom',
       align: 'start',
+      labels: {
+        fontColor: '#fff',
+      },
     },
     maintainAspectRatio: false,
   };
