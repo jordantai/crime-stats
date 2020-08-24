@@ -6,8 +6,7 @@ const Footer = () => {
   const year = newDate.getFullYear();
   return (
     <FooterContainer>
-      <p>Crime Stats MCR</p>
-      <p>{year}</p>
+      <p>Crime Stats MCR {year}</p>
     </FooterContainer>
   );
 };

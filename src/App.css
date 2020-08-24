@@ -14,9 +14,17 @@ nav a {
   justify-content: center;
 }
 
+.borough-name {
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  padding-top: 1rem;
+}
+
 .chart-title {
   display: flex;
   justify-content: center;
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
   padding-top: 1rem;
 }

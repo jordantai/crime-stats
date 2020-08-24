@@ -87,7 +87,7 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
     return (
       <main>
         <ChartsContainer>
-          <h2 className="chart-title">{borough}</h2>
+          <h2 className="borough-name">{borough}</h2>
           <CrimeCategoryChart crime={crime} startDate={startDate} />
           <CrimeOutcomeChart crime={crime} startDate={startDate} />
         </ChartsContainer>

@@ -59,12 +59,44 @@ export const NavButton = styled.button`
     border-color: #5e88b8 !important;
     outline-color: #5e88b8;
   }
+
+  @media (min-width: 481px) {
+    width: auto;
+    margin: 0.5rem;
+  }
+  @media (min-width: 769px) {
+    width: auto;
+    margin: 0.5rem;
+  }
+  @media (min-width: 1025px) {
+    width: auto;
+    margin: 0.5rem;
+  }
 `;
 
 export const NavContainer = styled.nav`
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  @media (min-width: 481px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  @media (min-width: 769px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  @media (min-width: 1025px) {
+    justify-content: center;
+  }
+  @media (min-width: 1201px) {
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
 `;
 
 export const DatePickerContainer = styled.div`
@@ -72,6 +104,10 @@ export const DatePickerContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+
+  @media (min-width: 769px) {
+    flex-direction: row;
+  }
 `;
 
 export const DateSelector = styled(DatePicker)`
@@ -79,14 +115,20 @@ export const DateSelector = styled(DatePicker)`
   justify-content: center;
   border: 4px solid #5e88b8 !important;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 1rem;
+  @media (min-width: 769px) {
+    padding: 0.5rem;
+  }
 `;
 
 export const DateText = styled.h3`
   justify-content: center;
   text-align: center;
   padding: 0 0.5rem 0 0.5rem;
+  @media (min-width: 769px) {
+    padding: 0.5rem;
+  }
 `;
 
 export const DateSubText = styled.p`
@@ -102,6 +144,6 @@ export const ChartsContainer = styled.section`
 export const FooterContainer = styled.footer`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 0 0.5rem 0 0.5rem;
 `;
