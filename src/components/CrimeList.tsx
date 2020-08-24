@@ -1,6 +1,7 @@
 import React, { Component, MouseEvent } from 'react';
 import { RouteComponentProps, Redirect } from '@reach/router';
 import * as api from '../utils/api';
+import Loader from 'react-loader-spinner';
 import CrimeCategoryChart from './CrimeCategoryChart';
 import CrimeOutcomeChart from './CrimeOutcomeChart';
 import ErrorDisplay from './ErrorDisplay';
@@ -81,7 +82,19 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
       borough =
         boroughName[0].toUpperCase() + boroughName.slice(1, boroughName.length);
     }
-    if (isLoading) return <h2>Loading...</h2>;
+    if (boroughName === 'city') {
+      borough = 'Manchester City Centre';
+    }
+    if (isLoading)
+      return (
+        <Loader
+          className="loader"
+          type="Puff"
+          color="#5e88b8"
+          width={300}
+          height={300}
+        />
+      );
     if (err === 'error') return <ErrorDisplay />;
     else if (err === 'redirect') return <Redirect to="/" noThrow />;
     return (
