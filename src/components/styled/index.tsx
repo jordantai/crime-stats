@@ -9,7 +9,7 @@ export const MainWrapper = styled.div`
   background-attachment: fixed;
   background-size: 40%;
   width: 100%;
-  min-height: 90rem;
+  min-height: 48rem;
   margin: 0 auto;
   font-family: 'Josefin Sans', sans-serif;
 `;
@@ -115,9 +115,9 @@ export const DateSelector = styled(DatePicker)`
   justify-content: center;
   border: 4px solid #5e88b8 !important;
   text-align: center;
-  font-size: 1.5rem;
-  padding: 1rem;
-  @media (min-width: 769px) {
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  @media (min-width: 768px) {
     padding: 0.5rem;
   }
 `;
@@ -146,4 +146,11 @@ export const FooterContainer = styled.footer`
   flex-direction: row;
   justify-content: flex-end;
   padding: 0 0.5rem 0 0.5rem;
+`;
+
+export const HomeContainer = styled.div`
+  margin: 0 1.5rem 0 1.5rem;
+  padding: 0 1.5rem 1.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
 `;
