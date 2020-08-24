@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from '@reach/router';
-import { NavButton } from './styled/index';
+import { NavButton, NavContainer } from './styled/index';
 
 const NavBar = () => {
   return (
-    <nav>
+    <NavContainer>
       <Link to="/borough/bolton">
         <NavButton value="bolton">Bolton</NavButton>
       </Link>
@@ -35,7 +35,7 @@ const NavBar = () => {
       <Link to="/borough/wigan">
         <NavButton value="wigan">Wigan</NavButton>
       </Link>
-    </nav>
+    </NavContainer>
   );
 };
 

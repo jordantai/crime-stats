@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import policeImg from './img/lego-police.png';
+import DatePicker from 'react-datepicker';
 
 export const MainWrapper = styled.div`
   background-image: url(${policeImg});
@@ -35,12 +36,13 @@ export const SubTitle = styled.h2`
 `;
 
 export const NavButton = styled.button`
+  width: 95%;
   color: #494949 !important;
   text-transform: uppercase;
   text-decoration: none;
   background: #ffffff;
   padding: 1rem;
-  margin: 0 0.5rem 0.5rem 0.5rem;
+  margin-bottom: 0.5rem;
   border: 4px solid #494949 !important;
   display: inline-block;
   transition: all 0.4s ease 0s;
@@ -59,19 +61,45 @@ export const NavButton = styled.button`
   }
 `;
 
-// export const NavLink = styled(Link)`
-//   color: #494949 !important;
-//   text-transform: uppercase;
-//   text-decoration: none;
-//   background: #ffffff;
-//   padding: 20px;
-//   border: 4px solid #494949 !important;
-//   display: inline-block;
-//   transition: all 0.4s ease 0s;
-//   &:hover {
-//     color: #ffffff !important;
-//     background: #f6b93b;
-//     border-color: #f6b93b !important;
-//     transition: all 0.4s ease 0s;
-//   }
-// `;
+export const NavContainer = styled.nav`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const DatePickerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+`;
+
+export const DateSelector = styled(DatePicker)`
+  width: 80%;
+  justify-content: center;
+  border: 4px solid #5e88b8 !important;
+  text-align: center;
+  font-size: 1rem;
+  padding: 1rem;
+`;
+
+export const DateText = styled.h3`
+  justify-content: center;
+  text-align: center;
+  padding: 0 0.5rem 0 0.5rem;
+`;
+
+export const DateSubText = styled.p`
+  justify-content: center;
+  text-align: center;
+`;
+
+export const ChartsContainer = styled.section`
+  margin-top: 2rem;
+`;
+
+export const FooterContainer = styled.footer`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
