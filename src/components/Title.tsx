@@ -1,10 +1,11 @@
 import React from 'react';
+import { MainTitle, SubTitle } from './styled/index';
 
 const Title = () => {
   return (
     <header>
-      <h1>Crime Stats MCR</h1>
-      <h2>Historical crime information for all the boroughs of Manchester</h2>
+      <MainTitle>Crime Stats MCR</MainTitle>
+      <SubTitle>Crime info for all the boroughs of Greater Manchester</SubTitle>
     </header>
   );
 };

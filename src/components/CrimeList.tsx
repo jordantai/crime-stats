@@ -6,6 +6,7 @@ import CrimeOutcomeChart from './CrimeOutcomeChart';
 import ErrorDisplay from './ErrorDisplay';
 import { formatAreaCoords, formatDate } from '../utils/functions';
 import { areaCoords } from '../data/areaCoords';
+import { ChartsContainer } from './styled/index';
 
 class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
   state: CrimeListState = {
@@ -85,11 +86,11 @@ class CrimeList extends Component<CrimeListProps & RouteComponentProps> {
     else if (err === 'redirect') return <Redirect to="/" noThrow />;
     return (
       <main>
-        <h2>{borough}</h2>
-        <section>
+        <ChartsContainer>
+          <h2 className="borough-name">{borough}</h2>
           <CrimeCategoryChart crime={crime} startDate={startDate} />
           <CrimeOutcomeChart crime={crime} startDate={startDate} />
-        </section>
+        </ChartsContainer>
       </main>
     );
   }

@@ -22,20 +22,25 @@ const CrimeCategoryChart = ({ crime, startDate }: CrimeChartProps) => {
 
   const options = {
     legend: {
-      position: 'left',
+      position: 'bottom',
+      align: 'start',
+      labels: {
+        fontColor: '#fff',
+      },
     },
+    maintainAspectRatio: false,
   };
 
   return (
     <div>
-      <h2>
-        Crime stats for{' '}
+      <h2 className="chart-title">
+        Crimes in{' '}
         {startDate.toLocaleString('default', {
           month: 'long',
           year: 'numeric',
         })}{' '}
       </h2>
-      <Doughnut data={data} options={options} />
+      <Doughnut data={data} options={options} width={500} height={500} />
     </div>
   );
 };
