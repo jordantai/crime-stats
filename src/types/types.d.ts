@@ -63,3 +63,5 @@ type NeighbourhoodCoords = {
 type AreaCoords = {
   [key: string]: number[][];
 };
+
+declare module 'react-loader-spinner';
