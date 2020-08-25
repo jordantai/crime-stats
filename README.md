@@ -6,6 +6,10 @@ The app is purely front-end and fetches data from the Police API.
 
 It is built with React and Typescript and styled with Styled Components.
 
+**Live site**
+
+[CrimeStatsMCR](https://crime-stats-mcr.netlify.app/)
+
 **Author**
 
 Jordan Craigen
