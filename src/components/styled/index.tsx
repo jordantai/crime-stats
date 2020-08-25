@@ -100,7 +100,7 @@ export const NavContainer = styled.nav`
 `;
 
 export const DatePickerContainer = styled.div`
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
