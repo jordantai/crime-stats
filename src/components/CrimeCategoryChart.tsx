@@ -40,6 +40,7 @@ const CrimeCategoryChart = ({ crime, startDate }: CrimeChartProps) => {
           year: 'numeric',
         })}{' '}
       </h2>
+      <h3>Key stats</h3>
       <Doughnut data={data} options={options} width={500} height={500} />
     </div>
   );
